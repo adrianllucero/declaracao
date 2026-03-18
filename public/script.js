@@ -30,7 +30,7 @@ function validar(dados) {
 }
 
 async function carregarTemplates() {
-    const res = await fetch('/templates');
+    const res = await fetch('/api/templates');
     const templates = await res.json();
 
     const select = document.getElementById('template');
@@ -106,7 +106,7 @@ async function gerar() {
     try {
         const templateId = document.getElementById('template').value;
 
-        const res = await fetch('/gerar', {
+        const res = await fetch('/api/gerar', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ templateId, dados })

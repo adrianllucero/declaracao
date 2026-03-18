@@ -23,6 +23,14 @@ app.get('/templates', (req, res) => {
 
 app.post('/gerar', async (req, res) => {
     try {
+        const { templateId, dados } = req.body;
+
+        const template = templates.find(t => t.id === templateId);
+
+        if (!template) {
+            return res.status(404).send('Template não encontrado');
+        }
+
         const buffer = await gerarPdf(template, dados);
 
         res.setHeader('Content-Type', 'application/pdf');
@@ -35,6 +43,5 @@ app.post('/gerar', async (req, res) => {
         res.status(500).send('Erro ao gerar PDF');
     }
 });
-
 // 👇 ISSO AQUI É O CERTO NO VERCEL
 module.exports = serverless(app);
