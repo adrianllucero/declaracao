@@ -3,10 +3,10 @@ const PDFDocument = require('pdfkit');
 const getStream = require('get-stream');
 
 async function gerarPdf(template, dados) {
-    // cria o documento
+    // cria o documento PDF
     const doc = new PDFDocument({ margin: 50 });
 
-    // 🔥 o template desenha tudo no PDF
+    // desenha o conteúdo usando o template
     if (typeof template.render === 'function') {
         template.render(doc, dados);
     } else {
@@ -16,7 +16,7 @@ async function gerarPdf(template, dados) {
     // finaliza o PDF
     doc.end();
 
-    // retorna como Buffer
+    // retorna como Buffer (sem criar arquivo físico)
     const buffer = await getStream.buffer(doc);
     return buffer;
 }

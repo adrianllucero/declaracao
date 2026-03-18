@@ -1,26 +1,27 @@
-import { gerarPdf } from '../services/pdfService';
-import csfx from '../templates/csfx';
-import ubec from '../templates/ubec';
-import unica from '../templates/unica';
+// api/gerar.js
+const { gerarPdf } = require('../services/pdfService');
+const csfx = require('../templates/csfx');
+const ubec = require('../templates/ubec');
+const unica = require('../templates/unica');
 
 const templates = [csfx, ubec, unica];
 
 export default async function handler(req, res) {
-  try {
-    const { templateId, dados } = req.body;
-    const template = templates.find(t => t.id === templateId);
-    if (!template) return res.status(404).send('Template não encontrado');
+    try {
+        const { templateId, dados } = req.body;
 
-    const buffer = await gerarPdf(template, dados); // Buffer do Node
+        const template = templates.find(t => t.id === templateId);
+        if (!template) return res.status(404).send('Template não encontrado');
 
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'attachment; filename=arquivo.pdf');
-    res.setHeader('Content-Length', buffer.length); // 👈 importante
+        const buffer = await gerarPdf(template, dados);
 
-    res.end(buffer); // 👈 res.end envia buffer puro, sem corromper
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=declaracao.pdf');
+        res.setHeader('Content-Length', buffer.length);
 
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Erro ao gerar PDF');
-  }
+        res.end(buffer); // envia os bytes puros do PDF
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Erro ao gerar PDF');
+    }
 }
