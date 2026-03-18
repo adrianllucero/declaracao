@@ -21,7 +21,7 @@ app.get('/templates', (req, res) => {
     })));
 });
 
-app.post('/gerar', async (req, res) => {
+/*app.post('/gerar', async (req, res) => {
     try {
         const { templateId, dados } = req.body;
 
@@ -40,6 +40,20 @@ app.post('/gerar', async (req, res) => {
         res.status(500).send('Erro ao gerar PDF');
     }
 });
+*/
+app.post('/gerar', async (req, res) => {
+    try {
+        const buffer = await gerarPdf(template, dados);
 
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=arquivo.pdf');
+
+        res.send(buffer);
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Erro ao gerar PDF');
+    }
+});
 // 👇 ISSO AQUI É O CERTO NO VERCEL
 module.exports = serverless(app);
