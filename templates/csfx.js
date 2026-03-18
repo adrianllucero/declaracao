@@ -20,9 +20,9 @@ module.exports = {
     const larguraTexto = doc.page.width - 100;
 
     // caminhos das imagens
-    const logo = fs.readFileSync(path.join(process.cwd(), 'img/logo_csfx.png'));
-    const assinatura = fs.readFileSync(path.join(process.cwd(),'img/assinatura_csfx.png'));
-    const carimbo = fs.readFileSync(path.join(process.cwd(), 'img/carimbo_csfx.png'));
+    //const logo = fs.readFileSync(path.join(process.cwd(), 'img/logo_csfx.png'));
+    //const assinatura = fs.readFileSync(path.join(process.cwd(),'img/assinatura_csfx.png'));
+    //const carimbo = fs.readFileSync(path.join(process.cwd(), 'img/carimbo_csfx.png'));
 
     // =========================
     // LOGO
