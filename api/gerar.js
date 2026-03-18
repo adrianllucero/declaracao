@@ -11,11 +11,13 @@ export default async function handler(req, res) {
     const template = templates.find(t => t.id === templateId);
     if (!template) return res.status(404).send('Template não encontrado');
 
-    const buffer = await gerarPdf(template, dados);
+    const buffer = await gerarPdf(template, dados); // Buffer do Node
 
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', 'attachment; filename=arquivo.pdf');
-    res.send(buffer);
+    res.setHeader('Content-Length', buffer.length); // 👈 importante
+
+    res.end(buffer); // 👈 res.end envia buffer puro, sem corromper
 
   } catch (err) {
     console.error(err);
