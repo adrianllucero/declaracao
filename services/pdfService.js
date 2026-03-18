@@ -1,21 +1,33 @@
 const PDFDocument = require('pdfkit');
-const getStream = require('get-stream');
 
 async function gerarPdf(template, dados) {
-    const doc = new PDFDocument({ margin: 50 });
+    return new Promise((resolve, reject) => {
+        try {
+            const doc = new PDFDocument({ margin: 50 });
 
-    if (typeof template.render === 'function') {
-        template.render(doc, dados);
-    } else {
-        throw new Error('Template não possui função render()');
-    }
+            const chunks = [];
 
-    doc.end();
+            doc.on('data', chunk => chunks.push(chunk));
+            doc.on('end', () => {
+                const buffer = Buffer.concat(chunks);
+                resolve(buffer);
+            });
 
-    // 👇 ESSA LINHA QUE FALTAVA
-    const buffer = await getStream.buffer(doc);
+            doc.on('error', err => reject(err));
 
-    return buffer; // ✅ RETORNA o PDF
+            // render do template
+            if (typeof template.render === 'function') {
+                template.render(doc, dados);
+            } else {
+                throw new Error('Template inválido');
+            }
+
+            doc.end();
+
+        } catch (err) {
+            reject(err);
+        }
+    });
 }
 
 module.exports = { gerarPdf };
