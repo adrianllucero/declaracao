@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerador de Declarações</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+        <h1>Gerador de Declarações</h1>
+        <p class="subtitle">Preencha os dados para gerar o documento</p>
+
+        <label>Modelo</label>
+        <select id="template"></select>
+
+        <div id="form"></div>
+
+        <button id="btnGerar" onclick="gerar()">
+            <span id="btnText">Gerar PDF</span>
+        </button>
+
+        <div id="feedback" class="hidden"></div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
