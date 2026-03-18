@@ -23,17 +23,12 @@ app.get('/templates', (req, res) => {
 
 app.post('/gerar', async (req, res) => {
     try {
-        const { templateId, dados } = req.body;
+        const buffer = await gerarPdf(template, dados);
 
-        const template = templates.find(t => t.id === templateId);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=arquivo.pdf');
 
-        if (!template) {
-            return res.status(404).send('Template não encontrado');
-        }
-
-        const caminho = await gerarPdf(template, dados);
-
-        res.download(caminho);
+        res.send(buffer);
 
     } catch (err) {
         console.error(err);
