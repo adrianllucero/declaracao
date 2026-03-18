@@ -20,9 +20,27 @@ module.exports = {
     const larguraTexto = doc.page.width - 100;
 
     // caminhos das imagens
-    const logo = fs.readFileSync(path.join(process.cwd(), 'img/logo_csfx.png'));
-    const assinatura = fs.readFileSync(path.join(process.cwd(),'img/assinatura_csfx.png'));
-    const carimbo = fs.readFileSync(path.join(process.cwd(), 'img/carimbo_csfx.png'));
+const logoPath = path.join(process.cwd(), 'img/logo_csfx.png');
+const assinaturaPath = path.join(process.cwd(), 'img/assinatura_csfx.png');
+const carimboPath = path.join(process.cwd(), 'img/carimbo_csfx.png');
+
+// LOGO
+if (fs.existsSync(logoPath)) {
+    const logo = fs.readFileSync(logoPath);
+    doc.image(logo, 50, 30, { width: 60 });
+}
+
+// ASSINATURA
+if (fs.existsSync(assinaturaPath)) {
+    const assinatura = fs.readFileSync(assinaturaPath);
+    doc.image(assinatura, 260, doc.y, { width: 100 });
+}
+
+// CARIMBO
+if (fs.existsSync(carimboPath)) {
+    const carimbo = fs.readFileSync(carimboPath);
+    doc.image(carimbo, 170, doc.y, { width: 280 });
+}
 
     // =========================
     // LOGO
