@@ -1,4 +1,7 @@
-const { csfx, ubec, unica } = require('../templates');
+// import dos templates
+const csfx = require('../templates/csfx');
+const ubec = require('../templates/ubec');
+const unica = require('../templates/unica');
 
 export default function handler(req, res) {
   const templates = [csfx, ubec, unica];
