@@ -16,10 +16,10 @@ export default async function handler(req, res) {
         const buffer = await gerarPdf(template, dados);
 
         res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', 'attachment; filename=declaracao.pdf');
+        res.setHeader('Content-Disposition', 'inline; filename=declaracao.pdf');
         res.setHeader('Content-Length', buffer.length);
 
-        res.end(buffer); // envia os bytes puros do PDF
+        res.status(200).end(buffer);
     } catch (err) {
         console.error(err);
         res.status(500).send('Erro ao gerar PDF');
