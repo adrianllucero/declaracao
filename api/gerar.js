@@ -5,23 +5,30 @@ const ubec = require('../templates/ubec');
 const unica = require('../templates/unica');
 
 const templates = [csfx, ubec, unica];
-
 module.exports = async function handler(req, res) {
     try {
-        const { templateId, dados } = req.body;
+        const body = typeof req.body === 'string'
+            ? JSON.parse(req.body)
+            : req.body;
+
+        const { templateId, dados } = body;
 
         const template = templates.find(t => t.id === templateId);
-        if (!template) return res.status(404).send('Template não encontrado');
+        if (!template) {
+            return res.status(404).send('Template não encontrado');
+        }
 
         const buffer = await gerarPdf(template, dados);
 
+        // 👇 ESSENCIAL
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', 'inline; filename=declaracao.pdf');
         res.setHeader('Content-Length', buffer.length);
 
-        res.status(200).end(buffer);
+        res.end(buffer);
+
     } catch (err) {
         console.error(err);
         res.status(500).send('Erro ao gerar PDF');
     }
-}
+};
