@@ -124,10 +124,11 @@ async function gerar() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ templateId, dados })
         });
-
+        console.log(res.status);
+console.log(res.headers.get('content-type'));
         const blob = await res.blob();
         const url = window.URL.createObjectURL(blob);
-
+        window.open(url);
         const a = document.createElement('a');
         a.href = url;
         a.download = 'declaracao.pdf';
