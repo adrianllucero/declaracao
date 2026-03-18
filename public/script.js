@@ -30,19 +30,32 @@ function validar(dados) {
 }
 
 async function carregarTemplates() {
-    const res = await fetch('/api/templates');
-    const templates = await res.json();
+    try {
+        const res = await fetch('/api/templates');
 
-    const select = document.getElementById('template');
+        if (!res.ok) {
+            throw new Error("Erro ao buscar templates");
+        }
 
-    templates.forEach(t => {
-        const opt = document.createElement('option');
-        opt.value = t.id;
-        opt.textContent = t.nome;
-        select.appendChild(opt);
-    });
+        const templates = await res.json();
 
-    carregarCampos();
+        const select = document.getElementById('template');
+
+        select.innerHTML = ''; // limpa antes
+
+        templates.forEach(t => {
+            const opt = document.createElement('option');
+            opt.value = t.id;
+            opt.textContent = t.nome;
+            select.appendChild(opt);
+        });
+
+        carregarCampos();
+
+    } catch (err) {
+        console.error(err);
+        mostrarFeedback("Erro ao carregar templates", "error");
+    }
 }
 
 function criarInput(campo) {
@@ -129,5 +142,7 @@ async function gerar() {
     btn.classList.remove('loading');
     btnText.textContent = "Gerar PDF";
 }
-document.getElementById('template').addEventListener('change', carregarCampos);
-carregarTemplates();
+window.onload = () => {
+    document.getElementById('template').addEventListener('change', carregarCampos);
+    carregarTemplates();
+};
