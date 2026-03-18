@@ -1,6 +1,7 @@
 // templates/csfx.js
 
 module.exports = {
+    id: "csfx",
     nome: "Declaração CSFX",
 
     campos: [
