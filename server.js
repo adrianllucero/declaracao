@@ -55,6 +55,6 @@ app.post('/gerar', async (req, res) => {
 
 
 // =========================
-export default function handler(req, res) {
-  res.status(200).send("Funcionando 🚀");
-}
+app.listen(3000, () => {
+    console.log('Servidor rodando em http://localhost:3000');
+});
