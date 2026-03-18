@@ -12,8 +12,10 @@ async function gerarPdf(template, dados) {
 
     doc.end();
 
+    // 👇 ESSA LINHA QUE FALTAVA
     const buffer = await getStream.buffer(doc);
-    return buffer;
+
+    return buffer; // ✅ RETORNA o PDF
 }
 
 module.exports = { gerarPdf };

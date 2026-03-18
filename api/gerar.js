@@ -6,7 +6,7 @@ const unica = require('../templates/unica');
 
 const templates = [csfx, ubec, unica];
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     try {
         const { templateId, dados } = req.body;
 
