@@ -10,7 +10,9 @@ function gerarDadosAleatorios(d) {
         "Logística",
         "Engenharia de Software",
         "Ciências da Computação",
-        "Gestão Financeira"
+        "Administração",
+        "Letras",
+        "Ciências Contábeis"
     ];
 
     const periodo = Math.floor(Math.random() * 8) + 1;
