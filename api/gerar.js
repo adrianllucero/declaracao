@@ -7,7 +7,6 @@ const prominas = require('../templates/prominas');
 const { gerarDadosAutomaticos } = require('../services/geradorDados');
 const templates = [csfx, ubec, unica, prominas];
 
-
 module.exports = async function handler(req, res) {
     try {
         const body = typeof req.body === 'string'

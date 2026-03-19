@@ -31,7 +31,7 @@ function validar(dados) {
 let templates = [];
 
 async function carregarTemplates() {
-    const res = await fetch('/templates');
+    const res = await fetch('/api/templates');
     templates = await res.json();
 
     const select = document.getElementById('template');
@@ -62,7 +62,6 @@ function criarInput(campo) {
 
     return input;
 }
-
 function carregarCampos() {
     const templateId = document.getElementById('template').value;
 
