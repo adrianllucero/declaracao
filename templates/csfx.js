@@ -114,7 +114,7 @@ module.exports = {
         // =========================
         // DATA
         // =========================
-        const opcoes = { day: '2-digit', month: 'long', year: 'numeric' };
+        const opcoes = { day: '2-digit', month: 'long', year: 'numeric', timeZone: 'America/Sao_Paulo' };
         const dataFormatada = hoje.toLocaleDateString('pt-BR', opcoes);
 
         doc.text(`Ipatinga, ${dataFormatada}`, {

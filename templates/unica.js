@@ -19,12 +19,25 @@ function gerarDados(d) {
     const curso = cursos[Math.floor(Math.random() * cursos.length)];
     const matricula = Math.floor(10000000 + Math.random() * 90000000);
 
-    const hoje = new Date();
+const agora = new Date();
 
-    const meses = [
-        "janeiro","fevereiro","março","abril","maio","junho",
-        "julho","agosto","setembro","outubro","novembro","dezembro"
-    ];
+const dataBR = new Intl.DateTimeFormat('pt-BR', {
+    timeZone: 'America/Sao_Paulo',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+}).formatToParts(agora);
+
+const dia = dataBR.find(p => p.type === 'day').value;
+const mesNumero = dataBR.find(p => p.type === 'month').value;
+const ano = dataBR.find(p => p.type === 'year').value;
+
+const meses = [
+    "janeiro","fevereiro","março","abril","maio","junho",
+    "julho","agosto","setembro","outubro","novembro","dezembro"
+];
+
+const mesAtual = meses[parseInt(mesNumero) - 1];
 
     return {
         ...d,

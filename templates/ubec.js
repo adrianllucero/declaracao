@@ -123,7 +123,16 @@ Recredenciada para oferta na modalidade EAD pela Portaria Ministerial Nº 697 de
         // =========================
 
         const agora = new Date();
-const dataHora = agora.toLocaleString('pt-BR');
+const agora = new Date();
+
+const dataHora = agora.toLocaleString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'America/Sao_Paulo'
+});
 
 // posição fixa (pé da página)
 const yRodape = doc.page.height - 100;
