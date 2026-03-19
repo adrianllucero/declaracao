@@ -10,7 +10,6 @@ function gerarDadosAleatorios(d) {
         "Logística",
         "Engenharia de Software",
         "Ciências da Computação",
-        "Processos Gerenciais",
         "Gestão Financeira"
     ];
 

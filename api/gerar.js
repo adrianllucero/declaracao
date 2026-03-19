@@ -3,8 +3,9 @@ const { gerarPdf } = require('../services/pdfService');
 const csfx = require('../templates/csfx');
 const ubec = require('../templates/ubec');
 const unica = require('../templates/unica');
+const prominas = require('../templates/prominas');
 const { gerarDadosAutomaticos } = require('../services/geradorDados');
-const templates = [csfx, ubec, unica];
+const templates = [csfx, ubec, unica, prominas];
 
 
 module.exports = async function handler(req, res) {
