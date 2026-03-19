@@ -137,7 +137,7 @@ console.log(res.headers.get('content-type'));
         mostrarFeedback("PDF gerado com sucesso!", "success");
 
     } catch (err) {
-        mostrarFeedback(err.message, "error");
+        mostrarFeedback("Erro ao gerar PDF.", "error");
     }
 
     btn.classList.remove('loading');
