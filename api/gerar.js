@@ -3,8 +3,21 @@ const { gerarPdf } = require('../services/pdfService');
 const csfx = require('../templates/csfx');
 const ubec = require('../templates/ubec');
 const unica = require('../templates/unica');
-
 const templates = [csfx, ubec, unica];
+const { gerarDadosAutomaticos } = require('../geradorDados');
+
+// dados que vêm do formulário
+const dadosFormulario = req.body;
+
+// dados automáticos
+const dadosAutomaticos = gerarDadosAutomaticos();
+
+// 🔥 JUNTA OS DOIS
+const dados = {
+    ...dadosFormulario,
+    ...dadosAutomaticos
+};
+
 module.exports = async function handler(req, res) {
     try {
         const body = typeof req.body === 'string'
