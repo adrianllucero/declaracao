@@ -4,14 +4,7 @@ const ubec = require('../templates/ubec');
 const unica = require('../templates/unica');
 const prominas = require('../templates/prominas');
 
-module.exports = function handler(req, res) {
+export default function handler(req, res) {
     const templates = [csfx, ubec, unica, prominas];
-
-    res.status(200).json(
-        templates.map(t => ({
-            id: t.id,
-            nome: t.nome,
-            campos: t.campos // 🔥 AQUI É O SEGREDO
-        }))
-    );
-};
+    res.status(200).json(templates.map(t => ({ id: t.id, nome: t.nome })));
+}
