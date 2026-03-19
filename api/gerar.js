@@ -3,6 +3,7 @@ const { gerarPdf } = require('../services/pdfService');
 const csfx = require('../templates/csfx');
 const ubec = require('../templates/ubec');
 const unica = require('../templates/unica');
+const { gerarDadosAutomaticos } = require('../services/geradorDados');
 const templates = [csfx, ubec, unica];
 
 
@@ -14,14 +15,21 @@ module.exports = async function handler(req, res) {
 
         const { templateId, dados } = body;
 
-        const template = templates.find(t => t.id === templateId);
-        if (!template) {
-            return res.status(404).send('Template não encontrado');
-        }
+        // 🔥 carrega template dinamicamente
+        const template = require(`../templates/${templateId}`);
 
-        const buffer = await gerarPdf(template, dados);
+        // 🔥 gera dados automáticos
+        const dadosAuto = gerarDadosAutomaticos();
 
-        // 👇 ESSENCIAL
+        // 🔥 junta tudo
+        const dadosFinais = {
+            ...dados,
+            ...dadosAuto
+        };
+
+        // ⚠️ aqui precisa retornar BUFFER
+        const buffer = await gerarPdf(template, dadosFinais);
+
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', 'inline; filename=declaracao.pdf');
         res.setHeader('Content-Length', buffer.length);
