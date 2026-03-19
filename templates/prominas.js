@@ -87,7 +87,7 @@ module.exports = {
             doc.image(logo, doc.page.width / 2 - 60, 40, { width: 120 });
         }
 
-        doc.moveDown(5);
+        doc.moveDown(2);
 
         // =========================
         // INSTITUIÇÃO
@@ -100,7 +100,7 @@ Telefone: (31) 2109-2300
 www.faculdadesprominas.com.br`,
         { align: 'center' });
 
-        doc.moveDown(2);
+        doc.moveDown(5);
 
         // =========================
         // TÍTULO
@@ -171,7 +171,7 @@ www.faculdadesprominas.com.br`,
                 rodapeY,
                 {
                     width: largura,
-                    align: 'right'
+                    align: 'left'
                 }
             );
     }
