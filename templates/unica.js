@@ -39,14 +39,14 @@ const meses = [
 
 const mesAtual = meses[parseInt(mesNumero) - 1];
 
-    return {
-        ...d,
-        curso,
-        matricula,
-        mesAtual: meses[hoje.getMonth()],
-        ano: hoje.getFullYear(),
-        dia: hoje.getDate()
-    };
+return {
+    ...d,
+    curso,
+    matricula,
+    mesAtual,
+    ano,
+    dia
+};
 }
 
 module.exports = {
