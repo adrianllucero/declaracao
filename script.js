@@ -28,34 +28,22 @@ function validar(dados) {
     }
     return true;
 }
+let templates = [];
 
 async function carregarTemplates() {
-    try {
-        const res = await fetch('/api/templates');
+    const res = await fetch('/templates');
+    templates = await res.json();
 
-        if (!res.ok) {
-            throw new Error("Erro ao buscar templates");
-        }
+    const select = document.getElementById('template');
 
-        const templates = await res.json();
+    templates.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t.id;
+        opt.textContent = t.nome;
+        select.appendChild(opt);
+    });
 
-        const select = document.getElementById('template');
-
-        select.innerHTML = ''; // limpa antes
-
-        templates.forEach(t => {
-            const opt = document.createElement('option');
-            opt.value = t.id;
-            opt.textContent = t.nome;
-            select.appendChild(opt);
-        });
-
-        carregarCampos();
-
-    } catch (err) {
-        console.error(err);
-        mostrarFeedback("Erro ao carregar templates", "error");
-    }
+    carregarCampos();
 }
 
 function criarInput(campo) {
@@ -76,16 +64,11 @@ function criarInput(campo) {
 }
 
 function carregarCampos() {
+    const templateId = document.getElementById('template').value;
 
-    const templateSelecionado = document.getElementById('template').value;
+    const template = templates.find(t => t.id === templateId);
 
-    // campos padrão
-    campos = ["nome", "cpf", "dn", "cidade", "pai", "mae"];
-
-    // se for declaração única, adiciona RG
-    if (templateSelecionado === "unica") {
-        campos.push("rg");
-    }
+    campos = template.campos;
 
     const form = document.getElementById('form');
     form.innerHTML = '';

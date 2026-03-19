@@ -100,7 +100,7 @@ Telefone: (31) 2109-2300
 www.faculdadesprominas.com.br`,
         { align: 'center' });
 
-        doc.moveDown(5);
+        doc.moveDown(7);
 
         // =========================
         // TÍTULO
