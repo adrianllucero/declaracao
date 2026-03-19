@@ -1,75 +1,112 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f8fafc;
     margin: 0;
 }
 
-/* 🔥 container adaptável */
+/* CONTAINER */
 .container {
     width: 90%;
-    max-width: 400px;
-    margin: 30px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    max-width: 420px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
 }
 
+/* TÍTULO */
 h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     font-size: 22px;
+    font-weight: 600;
+    color: #111827;
 }
 
+/* LABEL */
 label {
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+    margin-top: 14px;
     display: block;
-    margin-top: 10px;
 }
 
+/* INPUTS */
 input, select {
     width: 100%;
-    padding: 12px;
-    margin-top: 5px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 16px; /* 🔥 melhor pra mobile */
+    padding: 12px 14px;
+    margin-top: 6px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    font-size: 15px;
+    background: #f9fafb;
+    transition: all 0.2s ease;
     text-transform: uppercase;
 }
 
-input:focus {
-    border-color: #007bff;
+/* FOCUS */
+input:focus, select:focus {
+    border-color: #6366f1;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
     outline: none;
 }
 
+/* BOTÃO */
 button {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 25px;
     padding: 14px;
     border: none;
-    background: #303030;
+    background: #111827;
     color: white;
-    font-size: 16px;
-    border-radius: 6px;
+    font-size: 15px;
+    border-radius: 10px;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
+/* HOVER */
 button:hover {
-    background: #1b1b1b;
+    background: #000;
+    transform: translateY(-1px);
 }
 
+/* LOADING */
+button.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* FEEDBACK */
+#feedback {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.success {
+    color: #16a34a;
+}
+
+.error {
+    color: #dc2626;
+}
+
+.hidden {
+    display: none;
+}
+
+/* MOBILE */
 @media (max-width: 480px) {
     .container {
-        padding: 15px;
+        padding: 20px;
         margin: 20px auto;
     }
 
     h1 {
         font-size: 20px;
-    }
-
-    button {
-        font-size: 15px;
-        padding: 12px;
     }
 }
